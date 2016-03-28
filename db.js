@@ -14,7 +14,7 @@ exports.connect = function(config) {
 		deferred.resolve("Already connected to mongo");
 	}
 
-	var url = config.host;
+	var url = config.host + "/" + config.db;
 	if(config.replicaSet){
 		url += "?replicaSet=" + config.replicaSet;
 	}

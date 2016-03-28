@@ -1,6 +1,6 @@
 {
   "name": "mongop",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Mongo client wrapped in promises",
   "main": "db.js",
   "repository": {
