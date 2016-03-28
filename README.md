@@ -11,7 +11,7 @@ Require mongop module:
 
 	var mongo = require('mongop');
 
-Connect to mongo - host is required, everything else is optional. Host string includes database (ie: 'mongodb://172.17.42.1:9000/bbs')
+Connect to mongo - host is required, everything else is optional. Host string includes database (ie: 'mongodb://127.0.0.1/test')
 
 	mongo.connect({
 			host:"<host>",
