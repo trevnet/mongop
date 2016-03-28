@@ -1,5 +1,8 @@
-var mongoClient = require('mongo').MongoClient
+var mongo = require('mongodb');
+var mongoClient = mongo.MongoClient;
 var Promise = require('bluebird');
+
+Promise.promisifyAll(mongo.Collection.prototype);
 
 var state = {
 	db: null,
@@ -9,8 +12,8 @@ var exports = module.exports = {};
 
 function afterConnect(db,collections,resolve){
 	state.db = db
-	for (var i in config.collections) {
-		exports[collections[i]] = Promise.promisifyAll(state.db.collection(collections[i]))
+	for (var i in collections) {
+		exports[collections[i]] = state.db.collection(collections[i]);
 	}
 	resolve("Successfully connected to mongo");
 }
