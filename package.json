@@ -1,0 +1,16 @@
+{
+  "name": "mongop",
+  "version": "1.0.0",
+  "description": "Mongo client wrapped in promises",
+  "main": "db.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/trevnet/mongop.git"
+  },
+  "author": "Trever Hixson",
+  "license": "ISC",
+  "dependencies": {
+    "mongodb": "^2.1.11",
+    "q": "^1.4.1"
+  }
+}
