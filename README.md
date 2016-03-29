@@ -43,7 +43,7 @@ db.collection1.findOne({hello:'world'})
 ```
 Retrieve the database connection object:
 ```
-db.db()
+db.getDb()
 ```
 Close the database connection:
 ```

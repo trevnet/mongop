@@ -70,21 +70,25 @@ describe('db.', function(){
 				done();
 			});
 		});
+		it('should create collection objects on module', function(done){
+			db.connect(databaseConfig.auth).then(function(result){
+				assert(db.cars);
+				assert(db.trucks);
+				assert(db.boats);
+				done();
+			});
+		})
 	});
 	describe('db()', function(){
 		it('should return null from state before connect', function(done){
-			db.db().then(function(storedb){
-				assert.deepEqual(storedb,{db:null});
-				done();
-			})
+			assert.equal(db.getDb(),null);
+			done();
 		});
 		it('should return stored db from state after connect', function(done){
 			db.connect(databaseConfig.auth).then(function(result){
-				db.db().then(function(storedb){
-					assert(storedb.db.close);
-					assert(storedb.db.collection);
-					done();
-				});
+				assert(db.getDb().close);
+				assert(db.getDb().collection);
+				done();
 			});
 		});
 	});
@@ -93,10 +97,8 @@ describe('db.', function(){
 			db.connect(databaseConfig.auth).then(function(result){
 				db.close().then(function(result){
 					assert.equal(result,"Successfully closed connection");
-					db.db().then(function(storedb){
-						assert.deepEqual(storedb,{db:null});
-						done();
-					})
+					assert.equal(db.getDb(),null);
+					done();
 				});
 			});
 		});

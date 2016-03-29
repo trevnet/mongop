@@ -52,8 +52,6 @@ exports.close = function() {
 	return Promise.resolve("Mongo connection already closed");
 }
 
-exports.db = function() {
-	return Promise.resolve({
-		db: state.db
-	});
+exports.getDb = function() {
+	return state.db;
 }
