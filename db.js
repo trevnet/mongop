@@ -33,7 +33,7 @@ exports.connect = function(config) {
 		}
 		return "Successfully connected to mongo";
 	},function(err){
-		return err;
+		return Promise.reject(err);
 	});
 
 }
@@ -44,7 +44,5 @@ exports.close = function() {
 }
 
 exports.db = function() {
-	return {
-		db: state.db
-	}
+	return state.db;
 }
