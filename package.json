@@ -1,6 +1,6 @@
 {
   "name": "mongop",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "description": "Mongo client wrapped in promises",
   "main": "db.js",
   "repository": {
@@ -8,6 +8,9 @@
     "url": "https://github.com/trevnet/mongop.git"
   },
   "author": "Trever Hixson",
+	"contributors":[
+		"Ammon Sarver"
+	],
   "license": "ISC",
   "dependencies": {
     "bluebird": "^3.3.4",

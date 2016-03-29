@@ -8,41 +8,46 @@ npm install Mongop
 
 ### Usage
 Require mongop module:
-
-	var mongo = require('mongop');
-
-Connect to mongo - host is required, everything else is optional. Host string includes database (ie: 'mongodb://127.0.0.1/test')
-
-	mongo.connect({
-			host:"<host>",
-			replicaSet:"<replica set>",
-			auth:{
+```
+	var db = require('mongop');
+```
+Connect to mongo - host is required, everything else is optional.
+```
+	db.connect({
+			db:"<db>",
+			host:"<host1:port1,host2:port2...hostN:portN>", // Ports are optional
+			user:{
 				username:"<username>",
 				password:"<password>"
-			}
+			},
+			options:{
+				replicaSet:"<replica set>",
+				authSource:"<auth source>" //if authenticating against a different database than db
+			},
+			collections:[
+				"<collection1>",
+				"<collection2>",
+				...
+				"<collectionN>"
+			]
 		})
-
-Retrieve the database connection object:
-
-	mongo.db()
-
-Retrieve a collection object:
-
-	mongo.collection(<collection name>)
-
-Since this module just wraps the mongodb module in promises, you can call any operation on the database and collection objects. In addition to this, the collection object has the following operations already wrapped in promises:
-
-	findOne(<match object>)
-	find(<match object>)
-	aggregate(<pipeline array>)
-	update(<match object>,<update object>,<options object>)
-	remove(<match object>)
+```
+Collections are loaded into the module on connection.
 
 Example usage:
-
-	mongo.collection('collection').findOne({hello:'world'})
+```
+	db.collection1.findOne({hello:'world'})
 	.then(function(result){
 		console.log(result);
 	},function(err){
 		console.log(err);
 	})
+```
+Retrieve the database connection object:
+```
+	db.db()
+```
+Close the database connection:
+```
+	db.close()
+```

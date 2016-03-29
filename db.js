@@ -1,70 +1,46 @@
-var mongoClient = require('mongo').MongoClient
+var url = require('url');
+var mongoClient = require('mongodb').MongoClient;
 var Promise = require('bluebird');
 
 var state = {
-	db: null,
+	db: null
+}
+
+function buildStringConnectionFromConfig(config){
+	var connection = {
+		protocol:"mongodb",
+		slashes:true, //puts the // after mongdb:
+		hostname:config.host,
+		pathname:config.db,
+		query:config.options
+	};
+	if (config.auth){
+		connection.auth = config.auth.username+":"+config.auth.password;
+	}
+	return url.format(connection);
 }
 
 var exports = module.exports = {};
 
-function afterConnect(db,collections,resolve){
-	state.db = db
-	for (var i in config.collections) {
-		exports[collections[i]] = Promise.promisifyAll(state.db.collection(collections[i]))
-	}
-	resolve("Successfully connected to mongo");
-}
-
 exports.connect = function(config) {
-	return new Promise(function(resolve,reject){
-		if (state.db){
-			resolve("Already connected to mongo");
+	if (state.db){
+		return Promise.resolve("Already connected to mongo");
+	}
+	return mongoClient.connect(buildStringConnectionFromConfig(config),{promiseLibrary:Promise}).then(function(db){
+		state.db = db;
+		for (var i in config.collections) {
+			exports[config.collections[i]] = state.db.collection(config.collections[i]);
 		}
-
-		var url = config.host + "/" + config.db;
-		if(config.replicaSet){
-			url += "?replicaSet=" + config.replicaSet;
-		}
-		mongoClient.connect(url, function(err, db) {
-			if (err){
-				reject(err)
-			}
-			else{
-				if(config.auth){
-					db.admin().authenticate(config.auth.username,config.auth.password,function(err,res){
-						if(err){
-							reject(err);
-						}
-						else{
-							afterConnect(db,config.collections,resolve);
-						}
-					})
-				}
-				else{
-					afterConnect(db,config.collections,resolve);
-				}
-			}
-		});
+		return "Successfully connected to mongo";
+	},function(err){
+		return err;
 	});
+
 }
 
 exports.close = function() {
-	return new Promise(function (resolve,reject){
-		if (state.db) {
-			state.db.close(function(err, result) {
-				if(err){
-					reject(err);
-				}
-				else{
-					state.db = null
-					resolve("Successfully closed mongo connection");
-				}
-			})
-		}
-		else{
-			resolve("Mongo connection already closed");
-		}
-	});
+	if (state.db) return state.db.close();
+	return Promise.resolve("Mongo connection already closed");
 }
 
 exports.db = function() {
