@@ -1,7 +1,5 @@
 # Mongop
 
-Config loaded, connection recycling, promise returning, mongo
-
 ### Installation
 ```
 npm install mongop
@@ -14,23 +12,23 @@ var db = require('mongop');
 Connect to mongo - host and db are required, everything else is optional.
 ```
 db.connect({
-		db:"<db>",
-		host:"<host1:port1,host2:port2...hostN:portN>", // Ports are optional
-		user:{
-			username:"<username>",
-			password:"<password>"
-		},
-		options:{
-			replicaSet:"<replica set>",
-			authSource:"<auth source>" //if authenticating against a different database than db
-		},
-		collections:[
-			"<collection1>",
-			"<collection2>",
-			...
-			"<collectionN>"
-		]
-	})
+	db:"<db>",
+	host:"<host1:port1,host2:port2...hostN:portN>", // Ports are optional
+	user:{
+		username:"<username>",
+		password:"<password>"
+	},
+	options:{
+		replicaSet:"<replica set>",
+		authSource:"<auth source>" //if authenticating against a different database than db
+	},
+	collections:[
+		"<collection1>",
+		"<collection2>",
+		...
+		"<collectionN>"
+	]
+})
 ```
 Collections are loaded into the module on connection.
 
