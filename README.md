@@ -1,17 +1,17 @@
 # Mongop
 
-Wraps mongodb operations in promises.
+Config loaded, connection recycling, promise returning, mongo
 
 ### Installation
-
-npm install Mongop
-
+```
+npm install mongop
+```
 ### Usage
 Require mongop module:
 ```
 	var db = require('mongop');
 ```
-Connect to mongo - host is required, everything else is optional.
+Connect to mongo - host and db are required, everything else is optional.
 ```
 	db.connect({
 			db:"<db>",
