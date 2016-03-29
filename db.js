@@ -10,7 +10,7 @@ function buildStringConnectionFromConfig(config){
 	var connection = {
 		protocol:"mongodb",
 		slashes:true, //puts the // after mongdb:
-		hostname:config.host,
+		host:config.host,
 		pathname:config.db,
 		query:config.options
 	};
