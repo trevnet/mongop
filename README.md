@@ -56,7 +56,7 @@ When testing your app, add the following code to the beginning of your tests to 
 var db = require('mongop');
 var collection = require('mongodb').Collection;
 for(var i in config.mongo.collections){
-	db[ config.mongo.collections[i] ] = collection.prototype;
+	db[ config.mongo.collections[i] ] = Object.create(collection.prototype);
 }
 ```
 
