@@ -49,3 +49,18 @@ Close the database connection:
 ```
 db.close()
 ```
+
+###Testing
+When testing your app, add the following code to the beginning of your tests to populate the mongop object with your collections.
+```
+var db = require('mongop');
+var collection = require('mongodb').Collection;
+for(var i in config.mongo.collections){
+	db[ config.mongo.collections[i] ] = collection.prototype;
+}
+```
+
+Then you can stub out the mongodb calls:
+```
+sinon.stub(db.Hello,'findOne').returns(q.when({"world":1}))
+```
