@@ -1,5 +1,4 @@
 var url = require('url');
-var assert = require('assert');
 var mongoClient = require('mongodb').MongoClient;
 var Promise = require('bluebird');
 

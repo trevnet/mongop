@@ -1,29 +1,29 @@
 {
-  "name": "mongop",
-  "version": "1.0.6",
-  "description": "Mongo client wrapped in promises",
-  "main": "db.js",
-  "scripts": {
+	"name": "mongop",
+	"version": "1.0.6",
+	"description": "Mongo client wrapped in promises",
+	"main": "db.js",
+	"scripts": {
 		"test": "istanbul cover -x test.js _mocha -- --colors test.js",
-    "nocovertest": "mocha --colors test.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/trevnet/mongop.git"
-  },
-  "author": "Trever Hixson",
-  "contributors": [
-    "Ammon Sarver"
-  ],
-  "license": "ISC",
-  "dependencies": {
-    "assert": "^1.3.0",
-    "bluebird": "^3.3.4",
-    "mongodb": "^2.1.11"
-  },
-  "devDependencies": {
-    "istanbul": "^0.4.2",
-    "mocha": "^2.4.5",
-    "sinon": "^1.17.3"
-  }
+		"nocovertest": "mocha --colors test.js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/trevnet/mongop.git"
+	},
+	"author": "Trever Hixson",
+	"contributors": [
+		"Ammon Sarver"
+	],
+	"license": "ISC",
+	"dependencies": {
+		"bluebird": "^3.3.4",
+		"mongodb": "^2.1.11"
+	},
+	"devDependencies": {
+		"assert": "^1.3.0",
+		"istanbul": "^0.4.2",
+		"mocha": "^2.4.5",
+		"sinon": "^1.17.3"
+	}
 }
